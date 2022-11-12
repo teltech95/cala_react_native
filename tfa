@@ -1,0 +1,74 @@
+Storing string value
+
+
+const storeData = async (value) => {
+  try {
+    await AsyncStorage.setItem('@storage_Key', value)
+  } catch (e) {
+    // saving error
+  }
+}
+
+
+Storing object value
+
+
+const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.setItem('@storage_Key', jsonValue)
+    } catch (e) {
+      // saving error
+    }
+  }
+
+
+  Reading string value
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@storage_Key')
+      if(value !== null) {
+        // value previously stored
+      }
+    } catch(e) {
+      // error reading value
+    }
+  }
+
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('@storage_Key')
+      return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch(e) {
+      // error reading value
+    }
+  
+
+
+  @expo-google-fonts/inter, @react-navigation/bottom-tabs, @react-navigation/drawer, @react-navigation/native, @react-navigation/native-stack, @react-navigation/stack, axios, react-native-paper, react-native-snap-carousel, styled-components, react-native-svg-transformer
+
+
+
+
+
+
+  =========================================================================================================
+
+
+
+  axios.all([
+    axios.get(`/Services`), 
+    axios.get(`/Accounts/Customers`),
+    axios.get(`/Accounts/Carriers`),
+    axios.get(`/Status`)
+  ])
+  .then(axios.spread((services, customers, carriers, status) => {
+    setFilterData((prev) => ({
+     ...prev,
+     services: services.data,
+     customers: customers.data,
+     carriers: carriers.data,
+     statuses: status.data,
+   }));
+  }));
